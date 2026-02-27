@@ -1,0 +1,27 @@
+<!-- Dettagli ristorante -->
+ <div *ngIf="restaurant">
+<h2>{{ restaurant.name }}</h2>
+<p>{{ restaurant.city }} - {{ restaurant.address }}</p>
+<p>{{ restaurant.description }}</p>
+<p>Posti disponibili: {{ restaurant.totalSeats }}</p>
+</div>
+<!-- Form di prenotazione -->
+<form [formGroup]="reservationForm" (ngSubmit)="submitReservation()">
+  <div>
+    <label>Numero posti:</label>
+    <input type="number" formControlName="numSeats" min="1">
+    <div *ngIf="reservationForm.get('numSeats')?.invalid && reservationForm.get('numSeats')?.touched">
+      Inserisci almeno 1 posto
+    </div>
+  </div>
+
+  <div>
+    <label>Data prenotazione:</label>
+    <input type="date" formControlName="date">
+    <div *ngIf="reservationForm.get('date')?.invalid && reservationForm.get('date')?.touched">
+      Data obbligatoria
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="reservationForm.invalid">Prenota</button>
+</form>

@@ -1,0 +1,28 @@
+<!-- Filtro ristoranti -->
+<form [formGroup]="filterForm" class="mb-4 flex gap-4">
+  <!-- Filtro città -->
+  <input type="text"
+         formControlName="city"
+         placeholder="Filtra per città"
+         class="border p-2 rounded flex-1" />
+
+  <!-- Filtro numero minimo posti -->
+  <input type="number"
+         formControlName="minSeats"
+         placeholder="Posti minimi"
+         class="border p-2 rounded w-32" />
+</form>
+
+<!-- Lista ristoranti -->
+<div *ngFor="let restaurant of filteredRestaurants" class="border rounded p-4 mb-2">
+  <h2>{{ restaurant.name }}</h2>
+  <p>{{ restaurant.city }} - {{ restaurant.address }}</p>
+  <p>{{ restaurant.description }}</p>
+  <p>Posti disponibili: {{ restaurant.totalSeats }}</p>
+  <button (click)="goToReservation(restaurant.id)">PRENOTA</button>
+</div>
+
+<!-- Messaggio se nessun ristorante trovato -->
+<p *ngIf="filteredRestaurants.length === 0" class="text-red-500 font-bold">
+  Nessun ristorante trovato
+</p>
