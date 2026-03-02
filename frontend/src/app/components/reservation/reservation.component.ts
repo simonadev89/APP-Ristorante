@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Restaurant } from '../../models/Restaurant';
 import { CommonModule } from '@angular/common';
-import { RestaurantService } from '../../core/services/restaurant-service';
+import { RestaurantService } from '../../core/service/restaurant-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ReservationService } from '../../core/services/reservation.service';
+import { ReservationService } from '../../core/service/reservation.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.services';
+import { AuthService } from '../../core/service/auth.services';
 @Component({
   selector: 'app-reservation',
   imports: [CommonModule, ReactiveFormsModule],

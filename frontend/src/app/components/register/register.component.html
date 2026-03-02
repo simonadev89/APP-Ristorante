@@ -1,1 +1,25 @@
 <p>register works!</p>
+<h2>Registrazione</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="name" placeholder="Nome">
+  <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+    Nome obbligatorio
+  </div>
+
+  <input type="email" formControlName="email" placeholder="Email">
+  <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+    Email non valida
+  </div>
+
+  <input type="password" formControlName="password" placeholder="Password">
+  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+    Password obbligatoria (min 6 caratteri)
+  </div>
+
+  <input type="password" formControlName="confirmPassword" placeholder="Conferma Password">
+  <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched">
+    Le password non coincidono
+  </div>
+
+  <button type="submit" [disabled]="registerForm.invalid">Registrati</button>
+</form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestaurantService } from '../../core/services/restaurant-service';
+import { RestaurantService } from '../../core/service/restaurant-service';
 import { Restaurant } from '../../models/Restaurant';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './restaurant-list.component.html',
   styleUrl: './restaurant-list.component.scss'
 })
-export class RestaurantListComponentComponent implements OnInit {
+export class RestaurantListComponent implements OnInit {
 
   restaurants: Restaurant[] = []; // Lista completa dei ristoranti dal backend
   filteredRestaurants: Restaurant[] = []; // lista filtrata da mostrare in UI
@@ -33,10 +33,13 @@ export class RestaurantListComponentComponent implements OnInit {
 
   loadRestaurants(): void {
     this.restaurantService.getRestaurants().subscribe({ 
-      next: (data) => {this.restaurants = data, 
+      next: (response) => {
+      this.restaurants = Array.isArray(response.data) ? response.data : [];
+      console.log('Ristoranti caricati:', this.restaurants);
       this.filteredRestaurants = [...this.restaurants]; 
       }, 
-      error: (err) => console.error('Errore caricamento ristoranti', err) 
+      error: (err) => console.error('Errore caricamento ristoranti', err)
+      
     });
   }
 
