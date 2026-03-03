@@ -11,7 +11,6 @@ import { RegisterRequest, RegisterResponse } from '../../models/register.model';
 export class AuthService {
 
   private apiUrl = `${environment.apiUrl}/auth`;
-  private apiRegisterUrl = `${environment.apiUrl}/users/register`;
 
   constructor(private http: HttpClient) {}
 
@@ -76,7 +75,5 @@ export class AuthService {
 
 
 
-  register(data: RegisterRequest) {
-    return this.http.post<RegisterResponse>(`${this.apiRegisterUrl}`, data);
-  }
+  
 }
